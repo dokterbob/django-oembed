@@ -1,7 +1,12 @@
+import logging
+
+logger = logging.getLogger('django_oembed')
+
 from django.contrib import admin
 
 from django_oembed.models import *
 from django_oembed.forms import *
+
 
 class OembedAdmin(admin.ModelAdmin):
     list_display = ('title', 'create_date', 'modify_date', )
@@ -10,6 +15,15 @@ class OembedAdmin(admin.ModelAdmin):
 
     actions_on_top = False
     actions_on_bottom = True
+
+    def get_form(self, request, obj=None, **kwargs):
+        if not obj:
+            # We're adding stuff
+            logger.debug('Rendering add form for %s' % self.model)
+            return self.add_form
+        else:
+            logger.debug('Rendering normal form.')
+            return super(OembedAdmin, self).get_form(request, obj, **kwargs)
 
 
 class LinkAdmin(OembedAdmin):

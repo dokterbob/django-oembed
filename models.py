@@ -19,17 +19,17 @@ class OembedAbstractBase(TitleAbstractBase,
 
     # Title is already in there
 
-    url = models.URLField(verify_exists=True)
+    url = models.URLField(verify_exists=True, editable=False)
 
-    thumbnail_url = models.URLField(blank=True, verify_exists=True)
-    thumbnail_width = models.SmallIntegerField(blank=True, null=True)
-    thumbnail_height = models.SmallIntegerField(blank=True, null=True)
+    thumbnail_url = models.URLField(blank=True, verify_exists=True, editable=False)
+    thumbnail_width = models.SmallIntegerField(blank=True, null=True, editable=False)
+    thumbnail_height = models.SmallIntegerField(blank=True, null=True, editable=False)
 
-    provider_name = models.CharField(blank=True, max_length=255)
-    provider_url = models.CharField(blank=True, max_length=255)
+    provider_name = models.CharField(blank=True, max_length=255, editable=False)
+    provider_url = models.CharField(blank=True, max_length=255, editable=False)
 
-    author_name = models.CharField(blank=True, max_length=255)
-    author_url = models.URLField(blank=True, verify_exists=False)
+    author_name = models.CharField(blank=True, max_length=255, editable=False)
+    author_url = models.URLField(blank=True, verify_exists=False, editable=False)
 
 
 class Link(OembedAbstractBase):
@@ -37,19 +37,19 @@ class Link(OembedAbstractBase):
 
 
 class EmbeddedRich(OembedAbstractBase):
-    html = models.TextField(blank=True)
-    width = models.SmallIntegerField(blank=True, null=True)
-    height = models.SmallIntegerField(blank=True, null=True)
+    html = models.TextField(blank=True, editable=False)
+    width = models.SmallIntegerField(blank=True, null=True, editable=False)
+    height = models.SmallIntegerField(blank=True, null=True, editable=False)
 
 
 class EmbeddedVideo(OembedAbstractBase):
-    html = models.TextField(blank=True)
-    width = models.SmallIntegerField(blank=True, null=True)
-    height = models.SmallIntegerField(blank=True, null=True)
+    html = models.TextField(blank=True, editable=False)
+    width = models.SmallIntegerField(blank=True, null=True, editable=False)
+    height = models.SmallIntegerField(blank=True, null=True, editable=False)
 
-    duration = models.SmallIntegerField(blank=True, null=True)
+    duration = models.SmallIntegerField(blank=True, null=True, editable=False)
 
 
 class EmbeddedPhoto(OembedAbstractBase):
-    width = models.SmallIntegerField(blank=True, null=True)
-    height = models.SmallIntegerField(blank=True, null=True)
+    width = models.SmallIntegerField(blank=True, null=True, editable=False)
+    height = models.SmallIntegerField(blank=True, null=True, editable=False)

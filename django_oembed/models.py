@@ -19,7 +19,7 @@ class OembedAbstractBase(TitleAbstractBase,
 
     # Title is already in there
 
-    url = models.URLField(verify_exists=True, editable=False)
+    url = models.URLField(verify_exists=True)
 
     thumbnail_url = models.URLField(blank=True, verify_exists=True, editable=False)
     thumbnail_width = models.SmallIntegerField(blank=True, null=True, editable=False)

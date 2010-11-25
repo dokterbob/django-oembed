@@ -8,7 +8,8 @@ from django import forms
 from django.template.defaultfilters import slugify
 from django.utils.translation import ugettext_lazy as _
 
-from django_oembed.models import *
+from django_oembed.models import EmbeddedVideo, EmbeddedPhoto, \
+                                 EmbeddedRich, Link
 from django_oembed import settings
 
 """ This is where the Oembed magic takes place. """

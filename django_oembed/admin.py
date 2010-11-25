@@ -7,6 +7,7 @@ from django.contrib import admin
 from django_oembed.models import *
 from django_oembed.forms import *
 
+from django_oembed.util import remove_from_fieldsets
 
 class OembedAdmin(admin.ModelAdmin):
     list_display = ('title', 'create_date', 'modify_date', )
@@ -15,6 +16,25 @@ class OembedAdmin(admin.ModelAdmin):
 
     actions_on_top = False
     actions_on_bottom = True
+
+    def get_fieldsets(self, request, obj=None):
+        "Hook for specifying fieldsets for the add form."
+        
+        original_fieldsets = super(OembedAdmin, self).get_fieldsets(request, obj)
+        if not obj:
+            # We're adding stuff
+            
+            return original_fieldsets
+        else:
+            # Organise this stuff a bit
+            remove_from_fieldsets(original_fieldsets, ('title', 'slug', 'description'))
+            
+            return (
+                        (None, {
+                            'fields': ('title', 'slug', 'description',)
+                        }),
+                        ('Content', original_fieldsets[0][1])
+                   )
 
     def get_form(self, request, obj=None, **kwargs):
         if not obj:
